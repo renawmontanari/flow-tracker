@@ -4,6 +4,7 @@ export default {
   data() {
     return {
       tempoEmSegundos: 0,
+      cronometro: 0,
     };
   },
   computed: {
@@ -13,14 +14,13 @@ export default {
   },
   methods: {
     iniciarContagem() {
-      setInterval(() => {
+      this.cronometro = setInterval(() => {
         this.tempoEmSegundos += 1;
       }, 1000);
-      console.log("Iniciando contagem...");
     },
 
     finalizarContagem() {
-      console.log("Finalizando contagem...");
+      clearInterval(this.cronometro);
     },
   },
 };
