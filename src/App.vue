@@ -1,7 +1,6 @@
 <script lang="ts">
-import { defineComponent } from "vue";
 import BarraLateral from "./components/BarraLateral.vue";
-import Formulario from "./components/formulario.vue";
+import Formulario from "./components/Formulario.vue";
 
 export default {
   name: "App",

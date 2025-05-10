@@ -1,5 +1,4 @@
 <script lang="ts">
-import { defineComponment } from "vue";
 
 export default {
   name: "Formulario",
