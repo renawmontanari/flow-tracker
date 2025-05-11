@@ -6,6 +6,18 @@ export default {
   components: {
     Temporizador,
   },
+  data() {
+    return {
+      descricao: "",
+    };
+  },
+  methods: {
+    finalizarTarefa(tempoDecorido: number): void {
+      console.log("Tempo da tarefa: ", tempoDecorido);
+      console.log("Nome da tarefa: ", this.descricao);
+      this.descricao = "";
+    },
+  },
 };
 </script>
 
@@ -21,10 +33,11 @@ export default {
           type="text"
           class="input"
           placeholder="Qual tarefa você deseja iniciar?"
+          v-model="descricao"
         />
       </div>
       <div class="column">
-        <Temporizador />
+        <Temporizador @aoTemporizadorFinalizado="finalizarTarefa" />
       </div>
     </div>
   </div>

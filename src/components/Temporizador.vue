@@ -3,6 +3,7 @@ import Cronometro from "./Cronometro.vue";
 
 export default {
   name: "Temporizador",
+  emits: ["aoTemporizadorFinalizado"],
   components: {
     Cronometro,
   },
@@ -24,6 +25,8 @@ export default {
     finalizarContagem() {
       this.cronometroRodando = false;
       clearInterval(this.cronometro);
+      this.$emit("aoTemporizadorFinalizado", this.tempoEmSegundos);
+      this.tempoEmSegundos = 0;
     },
   },
 };
