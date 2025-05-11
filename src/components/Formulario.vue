@@ -1,27 +1,10 @@
 <script lang="ts">
-import Cronometro from "./Cronometro.vue";
+import Temporizador from "./Temporizador.vue";
 
 export default {
   name: "Formulario",
   components: {
-    Cronometro,
-  },
-  data() {
-    return {
-      tempoEmSegundos: 0,
-      cronometro: 0,
-    };
-  },
-  methods: {
-    iniciarContagem() {
-      this.cronometro = setInterval(() => {
-        this.tempoEmSegundos += 1;
-      }, 1000);
-    },
-
-    finalizarContagem() {
-      clearInterval(this.cronometro);
-    },
+    Temporizador,
   },
 };
 </script>
@@ -41,23 +24,7 @@ export default {
         />
       </div>
       <div class="column">
-        <div
-          class="is-flex is-align-items-center is-justify-content-space-between"
-        >
-          <Cronometro :tempoEmSegundos="tempoEmSegundos" />
-          <button class="button" @click="iniciarContagem">
-            <span class="icon">
-              <i class="fas fa-play"></i>
-            </span>
-            <span>play</span>
-          </button>
-          <button class="button" @click="finalizarContagem">
-            <span class="icon">
-              <i class="fas fa-stop"></i>
-            </span>
-            <span>stop</span>
-          </button>
-        </div>
+        <Temporizador />
       </div>
     </div>
   </div>
