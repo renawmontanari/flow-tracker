@@ -1,4 +1,5 @@
 <script lang="ts">
+import Botao from "./Botao.vue";
 import Cronometro from "./Cronometro.vue";
 
 export default {
@@ -6,6 +7,7 @@ export default {
   emits: ["aoTemporizadorFinalizado"],
   components: {
     Cronometro,
+    Botao,
   },
   data() {
     return {
@@ -33,27 +35,21 @@ export default {
 </script>
 
 <template>
-  <div class="is-flex is-align-items-center is-justify-content-space-between">
+  <section
+    class="is-flex is-align-items-center is-justify-content-space-between"
+  >
     <Cronometro :tempoEmSegundos="tempoEmSegundos" />
-    <button
-      class="button"
-      @click="iniciarContagem"
-      :disabled="cronometroRodando"
-    >
-      <span class="icon">
-        <i class="fas fa-play"></i>
-      </span>
-      <span>play</span>
-    </button>
-    <button
-      class="button"
-      @click="finalizarContagem"
-      :disabled="!cronometroRodando"
-    >
-      <span class="icon">
-        <i class="fas fa-stop"></i>
-      </span>
-      <span>stop</span>
-    </button>
-  </div>
+    <Botao
+      @clicado="iniciarContagem"
+      icone="fas fa-play"
+      texto="play"
+      :desabilitado="cronometroRodando"
+    />
+    <Botao
+      @clicado="finalizarContagem"
+      icone="fas fa-stop"
+      texto="stop"
+      :desabilitado="!cronometroRodando"
+    />
+  </section>
 </template>
