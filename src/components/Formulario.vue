@@ -1,16 +1,16 @@
 <script lang="ts">
+import Cronometro from "./Cronometro.vue";
+
 export default {
   name: "Formulario",
+  components: {
+    Cronometro,
+  },
   data() {
     return {
       tempoEmSegundos: 0,
       cronometro: 0,
     };
-  },
-  computed: {
-    tempoDecorrido(): string {
-      return new Date(this.tempoEmSegundos * 1000).toISOString().substr(11, 8);
-    },
   },
   methods: {
     iniciarContagem() {
@@ -44,9 +44,7 @@ export default {
         <div
           class="is-flex is-align-items-center is-justify-content-space-between"
         >
-          <section>
-            <strong>{{ tempoDecorrido }}</strong>
-          </section>
+          <Cronometro :tempoEmSegundos="tempoEmSegundos" />
           <button class="button" @click="iniciarContagem">
             <span class="icon">
               <i class="fas fa-play"></i>
