@@ -16,6 +16,7 @@ export default {
   data() {
     return {
       tarefas: [] as ITarefa[],
+      modoClaroAtivo: false,
     };
   },
   computed: {
@@ -27,14 +28,20 @@ export default {
     salvarTarefa(tarefa: ITarefa) {
       this.tarefas.push(tarefa);
     },
+    trocarTema(modoClaroAtivo: boolean) {
+      this.modoClaroAtivo = modoClaroAtivo;
+    },
   },
 };
 </script>
 
 <template>
-  <main class="columns is-gapless is-multiline modo-escuro">
+  <main
+    class="columns is-gapless is-multiline"
+    :class="{ 'modo-escuro': modoClaroAtivo }"
+  >
     <div class="column is-one-quarter">
-      <BarraLateral />
+      <BarraLateral @aoTemaAlterado="trocarTema" />
     </div>
     <div class="column is-three-quarter conteudo">
       <Formulario @aoSalvarTarefa="salvarTarefa" />
