@@ -1,5 +1,6 @@
 <script lang="ts">
 import BarraLateral from "./components/BarraLateral.vue";
+import Box from "./components/Box.vue";
 import Formulario from "./components/Formulario.vue";
 import Tarefa from "./components/Tarefa.vue";
 import ITarefa from "./interfaces/ITarefa";
@@ -10,11 +11,17 @@ export default {
     BarraLateral,
     Formulario,
     Tarefa,
+    Box,
   },
   data() {
     return {
       tarefas: [] as ITarefa[],
     };
+  },
+  computed: {
+    listaVazia(): boolean {
+      return this.tarefas.length === 0;
+    },
   },
   methods: {
     salvarTarefa(tarefa: ITarefa) {
@@ -37,6 +44,7 @@ export default {
           :key="index"
           :tarefa="tarefa"
         />
+        <Box v-if="listaVazia"> Você não está muito produtivo hoje :( </Box>
       </div>
     </div>
   </main>
