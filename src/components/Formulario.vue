@@ -1,5 +1,6 @@
 <script lang="ts">
 import Temporizador from "./Temporizador.vue";
+import { v4 as uuidv4 } from "uuid";
 
 export default {
   name: "Formulario",
@@ -15,8 +16,10 @@ export default {
   methods: {
     finalizarTarefa(tempoDecorido: number): void {
       this.$emit("aoSalvarTarefa", {
+        id: uuidv4(),
         duracaoEmSegundos: tempoDecorido,
         descricao: this.descricao,
+        concluida: false,
       });
       this.descricao = "";
     },

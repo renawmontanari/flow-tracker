@@ -33,11 +33,13 @@ export default {
     },
     removerTarefa(tarefa: ITarefa) {
       this.tarefas = this.tarefas.filter(
-        (tarefasItem) => tarefasItem.id !== tarefa.id
+        (tarefasItem: ITarefa) => tarefasItem.id !== tarefa.id
       );
     },
     concluirTarefa(tarefaAtualizada: ITarefa) {
-      const index = this.tarefas.findIndex((t) => t.id === tarefaAtualizada.id);
+      const index = this.tarefas.findIndex(
+        (tarefaItem: ITarefa) => tarefaItem.id === tarefaAtualizada.id
+      );
       if (index !== -1) {
         this.tarefas[index] = { ...tarefaAtualizada };
       }
