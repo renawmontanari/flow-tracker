@@ -36,10 +36,10 @@ export default {
         this.$emit("concluirTarefa", { ...this.tarefa, concluida: true });
       }
     },
-    computed: {
-      estaConcluida(): boolean {
-        return this.tarefa.concluida || false;
-      },
+  },
+  computed: {
+    estaConcluida(): boolean {
+      return this.tarefa.concluida || false;
     },
   },
 };
@@ -87,8 +87,10 @@ export default {
 
 <style scoped>
 .completed-task {
-  opacity: 0.8;
-  background-color: #f5f5f5;
+  border: 1px solid #35ee60;
+  opacity: 1;
+  padding: 1rem;
+  border-radius: 4px;
 }
 
 .has-text-grey {
