@@ -32,7 +32,15 @@ export default {
       this.modoClaroAtivo = modoClaroAtivo;
     },
     removerTarefa(tarefa: ITarefa) {
-      this.tarefas = this.tarefas.filter((t) => t.id !== tarefa.id);
+      this.tarefas = this.tarefas.filter(
+        (tarefasItem) => tarefasItem.id !== tarefa.id
+      );
+    },
+    concluirTarefa(tarefaAtualizada: ITarefa) {
+      const index = this.tarefas.findIndex((t) => t.id === tarefaAtualizada.id);
+      if (index !== -1) {
+        this.tarefas[index] = { ...tarefaAtualizada };
+      }
     },
   },
 };
@@ -56,7 +64,9 @@ export default {
           @removerTarefa="removerTarefa"
           @concluirTarefa="concluirTarefa"
         />
-        <Box v-if="listaVazia"> Você não está muito produtivo hoje :( </Box>
+        <Box v-if="listaVazia">
+          Você não está muito produtivo hoje <i class="fas fa-smile"></i>
+        </Box>
       </div>
     </div>
   </main>
