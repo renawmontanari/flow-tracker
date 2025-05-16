@@ -31,6 +31,9 @@ export default {
     trocarTema(modoClaroAtivo: boolean) {
       this.modoClaroAtivo = modoClaroAtivo;
     },
+    removerTarefa(tarefa: ITarefa) {
+      this.tarefas = this.tarefas.filter((t) => t.id !== tarefa.id);
+    },
   },
 };
 </script>
@@ -47,9 +50,11 @@ export default {
       <Formulario @aoSalvarTarefa="salvarTarefa" />
       <div class="lista">
         <Tarefa
-          v-for="(tarefa, index) in tarefas"
-          :key="index"
+          v-for="tarefa in tarefas"
+          :key="tarefa.id"
           :tarefa="tarefa"
+          @removerTarefa="removerTarefa"
+          @concluirTarefa="concluirTarefa"
         />
         <Box v-if="listaVazia"> Você não está muito produtivo hoje :( </Box>
       </div>

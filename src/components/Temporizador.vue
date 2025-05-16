@@ -38,6 +38,7 @@ export default {
   <section
     class="is-flex is-align-items-center is-justify-content-space-between"
   >
+    <i class="fas fa-clock"></i>
     <Cronometro :tempoEmSegundos="tempoEmSegundos" />
     <Botao
       @clicado="iniciarContagem"
