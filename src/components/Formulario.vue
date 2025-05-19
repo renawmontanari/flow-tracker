@@ -17,9 +17,7 @@ export default {
       this.$emit("aoSalvarTarefa", {
         duracaoEmSegundos: tempoDecorido,
         descricao: this.descricao,
-        concluida: false,
       });
-      this.descricao = "";
     },
   },
 };
