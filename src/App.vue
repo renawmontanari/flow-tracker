@@ -31,19 +31,6 @@ export default {
     trocarTema(modoClaroAtivo: boolean) {
       this.modoClaroAtivo = modoClaroAtivo;
     },
-    removerTarefa(tarefa: ITarefa) {
-      this.tarefas = this.tarefas.filter(
-        (tarefasItem: ITarefa) => tarefasItem.id !== tarefa.id
-      );
-    },
-    concluirTarefa(tarefaAtualizada: ITarefa) {
-      const index = this.tarefas.findIndex(
-        (tarefaItem: ITarefa) => tarefaItem.id === tarefaAtualizada.id
-      );
-      if (index !== -1) {
-        this.tarefas[index] = { ...tarefaAtualizada };
-      }
-    },
   },
 };
 </script>
@@ -59,13 +46,7 @@ export default {
     <div class="column is-three-quarter conteudo">
       <Formulario @aoSalvarTarefa="salvarTarefa" />
       <div class="lista">
-        <Tarefa
-          v-for="tarefa in tarefas"
-          :key="tarefa.id"
-          :tarefa="tarefa"
-          @removerTarefa="removerTarefa"
-          @concluirTarefa="concluirTarefa"
-        />
+        <Tarefa v-for="tarefa in tarefas" :key="tarefa.id" :tarefa="tarefa" />
         <Box v-if="listaVazia">
           Você não está muito produtivo hoje <i class="fas fa-smile"></i>
         </Box>
