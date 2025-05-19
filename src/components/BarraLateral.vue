@@ -29,7 +29,23 @@ export default {
     <h1>
       <img class="img-logo" src="../assets/logo.png" alt="logo" />
     </h1>
-    <button class="button" @click="alterarTema">{{ textoBotao }}</button>
+    <div class="has-text-centered">
+      <button class="button" @click="alterarTema">{{ textoBotao }}</button>
+    </div>
+    <nav class="panel mt-5">
+      <ul>
+        <li>
+          <router-link to="/" class="link"
+            ><i class="fas fa-tasks m-2"></i>Tarefas</router-link
+          >
+        </li>
+        <li>
+          <router-link to="/projetos" class="link"
+            ><i class="fas fa-folder m-2"></i>Projetos</router-link
+          >
+        </li>
+      </ul>
+    </nav>
   </header>
 </template>
 
@@ -44,6 +60,19 @@ header {
 
 .img-logo {
   border-radius: 10px;
+}
+
+.panel li {
+  margin: 8px 0;
+}
+.link {
+  color: #fff;
+}
+.link:hover {
+  color: #faf0ca;
+}
+.link.router-link-active {
+  color: #faf0ca;
 }
 
 @media only screen and (max-width: 768px) {
