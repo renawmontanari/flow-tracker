@@ -1,33 +1,17 @@
 <script lang="ts">
 import BarraLateral from "./components/BarraLateral.vue";
-import Box from "./components/Box.vue";
-import Formulario from "./components/Formulario.vue";
-import Tarefa from "./components/Tarefa.vue";
-import ITarefa from "./interfaces/ITarefa";
 
 export default {
   name: "App",
   components: {
     BarraLateral,
-    Formulario,
-    Tarefa,
-    Box,
   },
   data() {
     return {
-      tarefas: [] as ITarefa[],
       modoClaroAtivo: false,
     };
   },
-  computed: {
-    listaVazia(): boolean {
-      return this.tarefas.length === 0;
-    },
-  },
   methods: {
-    salvarTarefa(tarefa: ITarefa) {
-      this.tarefas.push(tarefa);
-    },
     trocarTema(modoClaroAtivo: boolean) {
       this.modoClaroAtivo = modoClaroAtivo;
     },
@@ -44,13 +28,7 @@ export default {
       <BarraLateral @aoTemaAlterado="trocarTema" />
     </div>
     <div class="column is-three-quarter conteudo">
-      <Formulario @aoSalvarTarefa="salvarTarefa" />
-      <div class="lista">
-        <Tarefa v-for="tarefa in tarefas" :key="tarefa.id" :tarefa="tarefa" />
-        <Box v-if="listaVazia">
-          Você não está muito produtivo hoje <i class="fas fa-smile"></i>
-        </Box>
-      </div>
+      <router-view></router-view>
     </div>
   </main>
 </template>

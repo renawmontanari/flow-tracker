@@ -27,7 +27,7 @@ export default {
 <template>
   <header>
     <h1>
-      <img src="../assets/logo.png" alt="logo" />
+      <img class="img-logo" src="../assets/logo.png" alt="logo" />
     </h1>
     <button class="button" @click="alterarTema">{{ textoBotao }}</button>
   </header>
@@ -41,6 +41,11 @@ header {
   height: 100vh;
   text-align: center;
 }
+
+.img-logo {
+  border-radius: 10px;
+}
+
 @media only screen and (max-width: 768px) {
   header {
     padding: 2.5rem;
