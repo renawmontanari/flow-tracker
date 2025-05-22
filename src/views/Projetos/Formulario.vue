@@ -1,5 +1,6 @@
 <script lang="ts">
 import { useStore } from "@/store";
+import { ADICIONA_PROJETO, ATUALIZA_PROJETO } from "@/store/tipo-mutacoes";
 
 export default {
   name: "Formulario",
@@ -24,12 +25,12 @@ export default {
   methods: {
     salvar() {
       if (this.id) {
-        this.store.commit("ATUALIZA_PROJETO", {
+        this.store.commit(ATUALIZA_PROJETO, {
           id: this.id,
           nome: this.nomeDoProjeto,
         });
       } else {
-        this.store.commit("ADICIONA_PROJETO", this.nomeDoProjeto);
+        this.store.commit(ADICIONA_PROJETO, this.nomeDoProjeto);
       }
       this.nomeDoProjeto = "";
       this.$router.push("/projetos");
