@@ -2,7 +2,7 @@
 import Box from "../components/Box.vue";
 import Formulario from "../components/Formulario.vue";
 import Tarefa from "../components/Tarefa.vue";
-import ITarefa from "./interfaces/ITarefa";
+import ITarefa from "../interfaces/ITarefa";
 
 export default {
   name: "App",
@@ -32,8 +32,8 @@ export default {
 <template>
   <Formulario @aoSalvarTarefa="salvarTarefa" />
   <div class="lista">
-    <Tarefa v-for="tarefa in tarefas" :key="tarefa.id" :tarefa="tarefa" />
-    <Box v-if="listaVazia">
+    <Tarefa class="m-4" v-for="tarefa in tarefas" :tarefa="tarefa" />
+    <Box class="m-4" v-if="listaVazia">
       Você não está muito produtivo hoje <i class="fas fa-smile"></i>
     </Box>
   </div>

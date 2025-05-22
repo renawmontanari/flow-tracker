@@ -36,10 +36,7 @@ export default {
       <div class="column">
         <div class="is-flex is-align-items-center">
           <i class="fas fa-clock mr-2"></i>
-          <Cronometro
-            :tempoEmSegundos="tarefa.duracaoEmSegundos"
-            :pausado="estaConcluida"
-          />
+          <Cronometro :tempoEmSegundos="tarefa.duracaoEmSegundos" />
         </div>
       </div>
     </div>
