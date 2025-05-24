@@ -6,9 +6,11 @@ import {
   ATUALIZA_PROJETO,
   EXCLUIR_PROJETO,
 } from "./tipo-mutacoes";
+import { INotificacao, TipoNotificacao } from "@/interfaces/INotificacoes";
 
 interface Estado {
   projetos: IProjeto[];
+  notificacoes: INotificacao;
 }
 
 export const key: InjectionKey<Store<Estado>> = Symbol();
@@ -16,6 +18,26 @@ export const key: InjectionKey<Store<Estado>> = Symbol();
 export const store = createStore<Estado>({
   state: {
     projetos: [],
+    notificacoes: [
+      {
+        id: 1,
+        texto: "Projeto adicionado com sucesso!",
+        titulo: "sucesso",
+        tipo: TipoNotificacao.SUCESSO,
+      },
+      {
+        id: 2,
+        texto: "Projeto atualizado com sucesso!",
+        titulo: "atencao",
+        tipo: TipoNotificacao.ATENCAO,
+      },
+      {
+        id: 3,
+        texto: "Projeto excluído com sucesso!",
+        titulo: "falha",
+        tipo: TipoNotificacao.FALHA,
+      },
+    ],
   },
   mutations: {
     [ADICIONA_PROJETO](state, nomeDoProjeto: string) {

@@ -1,22 +1,38 @@
 <script lang="ts">
+import { TipoNotificacao } from "@/interfaces/INotificacoes";
+import { useStore } from "@/store";
+import { computed } from "vue";
+
 export default {
   name: "Notificacoes",
+  data() {
+    return {
+      contexto: {
+        [TipoNotificacao.SUCESSO]: "is-success",
+        [TipoNotificacao.ATENCAO]: "is-warning",
+        [TipoNotificacao.FALHA]: "is-danger",
+      },
+    };
+  },
+  setup() {
+    const store = useStore();
+    return {
+      notificacoes: computed(() => store.state.notificacoes),
+    };
+  },
 };
 </script>
 
 <template>
   <div class="notificacoes">
-    <article class="message is-success">
-      <div class="message-header">Atenção!</div>
-      <div class="message-body">Aqui o texto de notificação!</div>
-    </article>
-    <article class="message is-warning">
-      <div class="message-header">Atenção!</div>
-      <div class="message-body">Aqui o texto de notificação!</div>
-    </article>
-    <article class="message is-danger">
-      <div class="message-header">Atenção!</div>
-      <div class="message-body">Aqui o texto de notificação!</div>
+    <article
+      class="message"
+      :class="contexto[notificacao.tipo]"
+      v-for="notificacao in notificacoes"
+      :key="notificacao.id"
+    >
+      <div class="message-header">{{ notificacao.titulo }}</div>
+      <div class="message-body">{{ notificacao.texto }}</div>
     </article>
   </div>
 </template>
