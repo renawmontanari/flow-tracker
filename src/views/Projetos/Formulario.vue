@@ -1,6 +1,11 @@
 <script lang="ts">
+import { TipoNotificacao } from "@/interfaces/INotificacoes";
 import { useStore } from "@/store";
-import { ADICIONA_PROJETO, ATUALIZA_PROJETO } from "@/store/tipo-mutacoes";
+import {
+  ADICIONA_PROJETO,
+  ATUALIZA_PROJETO,
+  NOTIFICAR,
+} from "@/store/tipo-mutacoes";
 
 export default {
   name: "Formulario",
@@ -33,6 +38,11 @@ export default {
         this.store.commit(ADICIONA_PROJETO, this.nomeDoProjeto);
       }
       this.nomeDoProjeto = "";
+      this.store.commit(NOTIFICAR, {
+        titulo: "Novo projeto adicionado!",
+        texto: "O projeto foi salvo com sucesso!",
+        tipo: TipoNotificacao.SUCESSO,
+      });
       this.$router.push("/projetos");
     },
   },
