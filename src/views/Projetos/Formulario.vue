@@ -1,11 +1,8 @@
 <script lang="ts">
 import { TipoNotificacao } from "@/interfaces/INotificacoes";
+import { notificacaoMixin } from "@/minixs/notificar";
 import { useStore } from "@/store";
-import {
-  ADICIONA_PROJETO,
-  ATUALIZA_PROJETO,
-  NOTIFICAR,
-} from "@/store/tipo-mutacoes";
+import { ADICIONA_PROJETO, ATUALIZA_PROJETO } from "@/store/tipo-mutacoes";
 
 export default {
   name: "Formulario",
@@ -27,6 +24,7 @@ export default {
       nomeDoProjeto: "",
     };
   },
+  mixins: [notificacaoMixin],
   methods: {
     salvar() {
       if (this.id) {
@@ -38,11 +36,11 @@ export default {
         this.store.commit(ADICIONA_PROJETO, this.nomeDoProjeto);
       }
       this.nomeDoProjeto = "";
-      this.store.commit(NOTIFICAR, {
-        titulo: "Novo projeto adicionado!",
-        texto: "O projeto foi salvo com sucesso!",
-        tipo: TipoNotificacao.SUCESSO,
-      });
+      this.notificar(
+        TipoNotificacao.SUCESSO,
+        "Ótimo!",
+        "Projeto salvo com sucesso"
+      );
       this.$router.push("/projetos");
     },
   },
