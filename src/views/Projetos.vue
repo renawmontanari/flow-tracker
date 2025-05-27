@@ -6,7 +6,7 @@ export default {
 
 <template>
   <div class="projetos">
-    <h1 class="title">Projetos</h1>
+    <h1 class="title">Projetos2</h1>
     <router-view></router-view>
   </div>
 </template>
@@ -14,5 +14,9 @@ export default {
 <style scoped>
 .projetos {
   padding: 1.25rem;
+}
+
+.title {
+  color: gray;
 }
 </style>

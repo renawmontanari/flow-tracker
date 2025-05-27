@@ -72,3 +72,9 @@ export default {
     </form>
   </section>
 </template>
+
+<style scope>
+.label {
+  color: gray;
+}
+</style>
