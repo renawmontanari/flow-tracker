@@ -1,8 +1,8 @@
 <script lang="ts">
 import { TipoNotificacao } from "@/interfaces/INotificacoes";
-import { notificacaoMixin } from "@/minixs/notificar";
 import { useStore } from "@/store";
 import { ADICIONA_PROJETO, ATUALIZA_PROJETO } from "@/store/tipo-mutacoes";
+import useNotificador from "@/hooks/notificador";
 
 export default {
   name: "Formulario",
@@ -24,7 +24,6 @@ export default {
       nomeDoProjeto: "",
     };
   },
-  mixins: [notificacaoMixin],
   methods: {
     salvar() {
       if (this.id) {
@@ -46,8 +45,10 @@ export default {
   },
   setup() {
     const store = useStore();
+    const { notificar } = useNotificador();
     return {
       store,
+      notificar,
     };
   },
 };
