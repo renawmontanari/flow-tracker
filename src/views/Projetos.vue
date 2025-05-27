@@ -6,7 +6,7 @@ export default {
 
 <template>
   <div class="projetos">
-    <h1 class="title">Projetos2</h1>
+    <h1 class="title">Projetos</h1>
     <router-view></router-view>
   </div>
 </template>
