@@ -1,8 +1,8 @@
 <script lang="ts">
 import { TipoNotificacao } from "@/interfaces/INotificacoes";
 import { useStore } from "@/store";
-import { ADICIONA_PROJETO, ATUALIZA_PROJETO } from "@/store/tipo-mutacoes";
 import useNotificador from "@/hooks/notificador";
+import { ALTERAR_PROJETO, CADASTRAR_PROJETO } from "@/store/tipo-acoes";
 
 export default {
   name: "Formulario",
@@ -27,13 +27,19 @@ export default {
   methods: {
     salvar() {
       if (this.id) {
-        this.store.commit(ATUALIZA_PROJETO, {
-          id: this.id,
-          nome: this.nomeDoProjeto,
-        });
+        this.store
+          .dispatch(ALTERAR_PROJETO, {
+            id: this.id,
+            nome: this.nomeDoProjeto,
+          })
+          .then(() => this.lidarComSucesso());
       } else {
-        this.store.commit(ADICIONA_PROJETO, this.nomeDoProjeto);
+        this.store
+          .dispatch(CADASTRAR_PROJETO, this.nomeDoProjeto)
+          .then(() => this.lidarComSucesso());
       }
+    },
+    lidarComSucesso() {
       this.nomeDoProjeto = "";
       this.notificar(
         TipoNotificacao.SUCESSO,
