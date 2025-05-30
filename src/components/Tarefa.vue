@@ -7,6 +7,7 @@ import Botao from "./Botao.vue";
 
 export default {
   name: "Tarefa",
+  emits: ["aoTarefaClicada"],
   components: {
     Cronometro,
     Box,
@@ -16,12 +17,11 @@ export default {
     tarefa: {
       type: Object as PropType<ITarefa>,
       required: true,
-      validator: (tarefa: ITarefa) => {
-        return (
-          typeof tarefa.descricao === "string" &&
-          typeof tarefa.duracaoEmSegundos === "number"
-        );
-      },
+    },
+  },
+  methods: {
+    tarefaClicada(): void {
+      this.$emit("aoTarefaClicada", this.tarefa);
     },
   },
 };
@@ -29,7 +29,7 @@ export default {
 
 <template>
   <Box>
-    <div class="columns is-vcentered">
+    <div class="columns is-vcentered" @click="tarefaClicada">
       <div class="column is-4">
         {{ tarefa.descricao || "Tarefa sem descrição" }}
       </div>

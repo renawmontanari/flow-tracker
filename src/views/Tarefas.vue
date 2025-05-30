@@ -18,6 +18,11 @@ export default {
     Tarefa,
     Box,
   },
+  data() {
+    return {
+      tarefaSelecionada: null as ITarefa | null,
+    };
+  },
   computed: {
     listaVazia(): boolean {
       return this.tarefas.length === 0;
@@ -36,6 +41,9 @@ export default {
     salvarTarefa(tarefa: ITarefa): void {
       this.store.dispatch(CADASTRAR_TAREFAS, tarefa);
     },
+    selecionarTarefa(tarefa: ITarefa) {
+      this.tarefaSelecionada = tarefa;
+    },
   },
 };
 </script>
@@ -43,11 +51,17 @@ export default {
 <template>
   <Formulario @aoSalvarTarefa="salvarTarefa" />
   <div class="lista">
-    <Tarefa class="m-4" v-for="tarefa in tarefas" :tarefa="tarefa" />
+    <Tarefa
+      class="m-4"
+      v-for="(tarefa, index) in tarefas"
+      :tarefa="tarefa"
+      :key="index"
+      @aoTarefaClicada="selecionarTarefa"
+    />
     <Box class="m-4" v-if="listaVazia">
       Você não está muito produtivo hoje <i class="fas fa-smile"></i>
     </Box>
-    <div class="modal is-active">
+    <div class="modal" :class="{ 'is-active': tarefaSelecionada }">
       <div class="modal-background"></div>
       <div class="modal-card">
         <header class="modal-card-head">
