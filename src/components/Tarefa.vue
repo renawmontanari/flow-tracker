@@ -29,7 +29,7 @@ export default {
 
 <template>
   <Box>
-    <div class="columns is-vcentered" @click="tarefaClicada">
+    <div class="columns is-vcentered clicavel" @click="tarefaClicada">
       <div class="column is-4">
         {{ tarefa.descricao || "Tarefa sem descrição" }}
       </div>
@@ -46,4 +46,8 @@ export default {
   </Box>
 </template>
 
-<style scoped></style>
+<style scoped>
+.clicavel {
+  cursor: pointer;
+}
+</style>
