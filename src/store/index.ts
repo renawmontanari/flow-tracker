@@ -7,13 +7,14 @@ import {
   ADICIONA_TAREFA,
   ATUALIZA_PROJETO,
   DEFINIR_PROJETOS,
-  DEFINIR_TAREFAS,
+  DEFINIR_TAREFA,
   EXCLUIR_PROJETO,
   NOTIFICAR,
 } from "./tipo-mutacoes";
 import { INotificacao } from "@/interfaces/INotificacoes";
 import {
   ALTERAR_PROJETO,
+  ALTERAR_TAREFA,
   CADASTRAR_PROJETO,
   CADASTRAR_TAREFAS,
   OBTER_PROJETOS,
@@ -54,7 +55,7 @@ export const store = createStore<Estado>({
     [DEFINIR_PROJETOS](state, projetos: IProjeto[]) {
       state.projetos = projetos;
     },
-    [DEFINIR_TAREFAS](state, tarefas: ITarefa[]) {
+    [DEFINIR_TAREFA](state, tarefas: ITarefa[]) {
       state.tarefas = tarefas;
     },
     [NOTIFICAR](state, novaNotificacao: INotificacao) {
@@ -93,12 +94,15 @@ export const store = createStore<Estado>({
     [OBTER_TAREFAS]({ commit }) {
       http
         .get("tarefas")
-        .then((resposta) => commit(DEFINIR_TAREFAS, resposta.data));
+        .then((resposta) => commit(DEFINIR_TAREFA, resposta.data));
     },
     [CADASTRAR_TAREFAS]({ commit }, tarefa: ITarefa) {
       return http
         .post("/tarefas", tarefa)
         .then((resposta) => commit(ADICIONA_TAREFA, resposta.data));
+    },
+    [ALTERAR_TAREFA]({ commit }, tarefa: ITarefa) {
+      return http.put(`/tarefas/${tarefa.id}`, tarefa);
     },
   },
 });
