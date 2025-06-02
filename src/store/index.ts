@@ -5,6 +5,7 @@ import { createStore, Store, useStore as vuexUseStore } from "vuex";
 import {
   ADICIONA_PROJETO,
   ADICIONA_TAREFA,
+  ALTERAR_TAREFAS,
   ATUALIZA_PROJETO,
   DEFINIR_PROJETOS,
   DEFINIR_TAREFA,
@@ -71,6 +72,10 @@ export const store = createStore<Estado>({
     [ADICIONA_TAREFA](state, tarefa: ITarefa) {
       state.tarefas.push(tarefa);
     },
+    [ALTERAR_TAREFAS](state, tarefa: ITarefa) {
+      const index = state.tarefas.findIndex((proj) => proj.id == tarefa.id);
+      state.tarefas[index] = tarefa;
+    },
   },
   actions: {
     [OBTER_PROJETOS]({ commit }) {
@@ -102,7 +107,9 @@ export const store = createStore<Estado>({
         .then((resposta) => commit(ADICIONA_TAREFA, resposta.data));
     },
     [ALTERAR_TAREFA]({ commit }, tarefa: ITarefa) {
-      return http.put(`/tarefas/${tarefa.id}`, tarefa);
+      return http
+        .put(`/tarefas/${tarefa.id}`, tarefa)
+        .then(() => commit(ALTERAR_TAREFA, tarefa));
     },
   },
 });

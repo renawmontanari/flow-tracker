@@ -4,6 +4,7 @@ import Box from "../components/Box.vue";
 import Formulario from "../components/Formulario.vue";
 import Tarefa from "../components/Tarefa.vue";
 import {
+  ALTERAR_TAREFA,
   CADASTRAR_TAREFAS,
   OBTER_PROJETOS,
   OBTER_TAREFAS,
@@ -46,6 +47,11 @@ export default {
     },
     fecharModal() {
       this.tarefaSelecionada = null;
+    },
+    alterarTarefa() {
+      this.store
+        .dispatch(ALTERAR_TAREFA, this.tarefaSelecionada)
+        .then(() => this.fecharModal());
     },
   },
 };
@@ -95,7 +101,9 @@ export default {
         </section>
         <footer class="modal-card-foot">
           <div class="buttons">
-            <button class="button is-success">Salvar alterações</button>
+            <button class="button is-success" @click="alterarTarefa">
+              Salvar alterações
+            </button>
             <button class="button" @click="fecharModal">Cancelar</button>
           </div>
         </footer>
