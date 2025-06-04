@@ -1,5 +1,6 @@
 import IProjeto from "@/interfaces/IProjeto";
 import { Estado } from "@/store";
+import http from "@/http";
 import {
   ALTERAR_PROJETO,
   CADASTRAR_PROJETO,
