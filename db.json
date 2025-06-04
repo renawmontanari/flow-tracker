@@ -17,7 +17,7 @@
     {
       "id": "1",
       "duracaoEmSegundos": 120,
-      "descricao": "Alunos 20253",
+      "descricao": "Alunos 202535",
       "projeto": {
         "id": "4f7d",
         "nome": "Plano34"
@@ -80,12 +80,21 @@
     {
       "id": "0a5a",
       "duracaoEmSegundos": 0,
-      "descricao": ""
+      "descricao": "rererererereererer"
     },
     {
       "id": "5036",
       "duracaoEmSegundos": 0,
       "descricao": "teeww",
+      "projeto": {
+        "id": "610a",
+        "nome": "Plano344"
+      }
+    },
+    {
+      "id": "9bba",
+      "duracaoEmSegundos": 3,
+      "descricao": "teste",
       "projeto": {
         "id": "610a",
         "nome": "Plano344"
