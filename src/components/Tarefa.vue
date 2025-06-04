@@ -1,5 +1,5 @@
 <script lang="ts">
-import { PropType } from "vue";
+import { computed, PropType } from "vue";
 import Cronometro from "./Cronometro.vue";
 import ITarefa from "@/interfaces/ITarefa";
 import Box from "./Box.vue";
@@ -19,10 +19,19 @@ export default {
       required: true,
     },
   },
-  methods: {
-    tarefaClicada(): void {
-      this.$emit("aoTarefaClicada", this.tarefa);
-    },
+  setup(props, { emit }) {
+    const tarefaClicada = (): void => {
+      emit("aoTarefaClicada", props.tarefa);
+    };
+    const tempoGasto = computed(() => {
+      return new Date(props.tarefa.duracaoEmSegundos * 1000)
+        .toISOString()
+        .substr(11, 8);
+    });
+    return {
+      tarefaClicada,
+      tempoGasto,
+    };
   },
 };
 </script>
