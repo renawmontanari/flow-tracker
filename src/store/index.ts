@@ -24,7 +24,7 @@ import {
 } from "./tipo-acoes";
 import http from "@/http";
 
-interface Estado {
+export interface Estado {
   projetos: IProjeto[];
   tarefas: ITarefa[];
   notificacoes: INotificacao[];
