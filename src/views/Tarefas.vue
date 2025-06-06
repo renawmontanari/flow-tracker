@@ -60,6 +60,18 @@ export default {
 <template>
   <Formulario @aoSalvarTarefa="salvarTarefa" />
   <div class="lista">
+    <Box class="m-4" v-if="listaVazia">
+      Você não está muito produtivo hoje
+      <i class="fas fa-smile"></i>
+    </Box>
+    <div class="field">
+      <p class="control has-icons-left">
+        <input class="input" type="text" placeholder="Digite para filtrar" />
+        <span class="icon is-small is-left">
+          <i class="fas fa-search"></i>
+        </span>
+      </p>
+    </div>
     <Tarefa
       class="m-4"
       v-for="(tarefa, index) in tarefas"
@@ -67,10 +79,6 @@ export default {
       :key="index"
       @aoTarefaClicada="selecionarTarefa"
     />
-    <Box class="m-4" v-if="listaVazia">
-      Você não está muito produtivo hoje
-      <i class="fas fa-smile"></i>
-    </Box>
     <div
       class="modal"
       :class="{ 'is-active': tarefaSelecionada }"
