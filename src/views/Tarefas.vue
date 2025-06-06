@@ -9,7 +9,7 @@ import {
   OBTER_PROJETOS,
   OBTER_TAREFAS,
 } from "@/store/tipo-acoes";
-import { computed, ref } from "vue";
+import { computed, ref, watchEffect } from "vue";
 import ITarefa from "@/interfaces/ITarefa";
 
 export default {
@@ -36,15 +36,19 @@ export default {
 
     const filtro = ref("");
 
-    const tarefas = computed(() =>
-      store.state.tarefa.tarefas.filter(
-        (tarefasFiltradas) =>
-          !filtro.value || tarefasFiltradas.descricao.includes(filtro.value)
-      )
-    );
+    //const tarefas = computed(() =>
+    //  store.state.tarefa.tarefas.filter(
+    //    (tarefasFiltradas) =>
+    //      !filtro.value || tarefasFiltradas.descricao.includes(filtro.value)
+    //  )
+    //);
+
+    watchEffect(() => {
+      store.dispatch(OBTER_TAREFAS, filtro.value);
+    });
 
     return {
-      tarefas,
+      tarefas: computed(() => store.state.tarefa.tarefas),
       store,
       filtro,
     };
