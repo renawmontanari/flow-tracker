@@ -9,7 +9,7 @@ import {
   OBTER_PROJETOS,
   OBTER_TAREFAS,
 } from "@/store/tipo-acoes";
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import ITarefa from "@/interfaces/ITarefa";
 
 export default {
@@ -33,9 +33,20 @@ export default {
     const store = useStore();
     store.dispatch(OBTER_TAREFAS);
     store.dispatch(OBTER_PROJETOS);
+
+    const filtro = ref("");
+
+    const tarefas = computed(() =>
+      store.state.tarefa.tarefas.filter(
+        (tarefasFiltradas) =>
+          !filtro.value || tarefasFiltradas.descricao.includes(filtro.value)
+      )
+    );
+
     return {
-      tarefas: computed(() => store.state.tarefa.tarefas),
+      tarefas,
       store,
+      filtro,
     };
   },
   methods: {
@@ -66,7 +77,12 @@ export default {
     </Box>
     <div class="field">
       <p class="control has-icons-left">
-        <input class="input" type="text" placeholder="Digite para filtrar" />
+        <input
+          class="input"
+          type="text"
+          placeholder="Digite para filtrar"
+          v-model="filtro"
+        />
         <span class="icon is-small is-left">
           <i class="fas fa-search"></i>
         </span>
