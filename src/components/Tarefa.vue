@@ -40,15 +40,22 @@ export default {
   <Box>
     <div class="columns is-vcentered clicavel" @click="tarefaClicada">
       <div class="column is-4">
+        <i class="fas fa-tasks m-2"></i>
         {{ tarefa.descricao || "Tarefa sem descrição" }}
       </div>
       <div class="column is-3">
+        <i class="fas fa-folder m-2"></i>
         {{ tarefa.projeto?.nome || "Sem projeto vinculado" }}
       </div>
       <div class="column">
         <div class="is-flex is-align-items-center">
           <i class="fas fa-clock mr-2"></i>
           <Cronometro :tempoEmSegundos="tarefa.duracaoEmSegundos" />
+        </div>
+      </div>
+      <div>
+        <div class="column is-4">
+          <i class="fa-solid fa-share-nodes"></i>
         </div>
       </div>
     </div>

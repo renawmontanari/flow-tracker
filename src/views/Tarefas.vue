@@ -82,7 +82,7 @@ export default {
       <i class="fas fa-smile"></i>
     </Box>
     <div class="field">
-      <p class="control has-icons-left">
+      <p class="control has-icons-left m-4">
         <input
           class="input"
           type="text"
