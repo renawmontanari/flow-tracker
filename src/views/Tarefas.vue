@@ -11,6 +11,7 @@ import {
 } from "@/store/tipo-acoes";
 import { computed, ref, watchEffect } from "vue";
 import ITarefa from "@/interfaces/ITarefa";
+import Modal from "@/components/Modal.vue";
 
 export default {
   name: "App",
@@ -18,6 +19,7 @@ export default {
     Formulario,
     Tarefa,
     Box,
+    Modal,
   },
   data() {
     return {
@@ -99,43 +101,32 @@ export default {
       :key="index"
       @aoTarefaClicada="selecionarTarefa"
     />
-    <div
-      class="modal"
-      :class="{ 'is-active': tarefaSelecionada }"
-      v-if="tarefaSelecionada"
-    >
-      <div class="modal-background"></div>
-      <div class="modal-card">
-        <header class="modal-card-head">
-          <p class="modal-card-title">Editando uma tarefa</p>
-          <button
-            class="delete"
-            aria-label="close"
-            @click="fecharModal"
-          ></button>
-        </header>
-        <section class="modal-card-body">
-          <div class="field">
-            <label for="descricaoDaTarefa " class="label"
-              >Descrição da tarefa</label
-            >
-            <input
-              type="text"
-              class="input"
-              v-model="tarefaSelecionada.descricao"
-              id="descricaoDaTarefa"
-            />
-          </div>
-        </section>
-        <footer class="modal-card-foot">
-          <div class="buttons">
-            <button class="button is-success" @click="alterarTarefa">
-              Salvar alterações
-            </button>
-            <button class="button" @click="fecharModal">Cancelar</button>
-          </div>
-        </footer>
-      </div>
-    </div>
+    <Modal :mostrarModal="tarefaSelecionada != null">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Editando uma tarefa</p>
+        <button class="delete" aria-label="close" @click="fecharModal"></button>
+      </header>
+      <section class="modal-card-body">
+        <div class="field">
+          <label for="descricaoDaTarefa " class="label"
+            >Descrição da tarefa</label
+          >
+          <input
+            type="text"
+            class="input"
+            v-model="tarefaSelecionada.descricao"
+            id="descricaoDaTarefa"
+          />
+        </div>
+      </section>
+      <footer class="modal-card-foot">
+        <div class="buttons">
+          <button class="button is-success" @click="alterarTarefa">
+            Salvar alterações
+          </button>
+          <button class="button" @click="fecharModal">Cancelar</button>
+        </div>
+      </footer>
+    </Modal>
   </div>
 </template>
