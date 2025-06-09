@@ -26,6 +26,7 @@
 
 ---
 
+
 ## 📦 Instalação
 
 1. Clone o repositório:
@@ -39,3 +40,7 @@ npm install
 npx json-server --watch db.json --port 3000
 
 npm run dev
+```
+
+📚 Aprendizado
+Este projeto foi criado como parte do meu processo de aprendizado em Vue.js, guiado pelo conteúdo da Alura. Ele tem me ajudado a entender melhor a estrutura de componentes, gerenciamento de estado e integração com APIs REST.
