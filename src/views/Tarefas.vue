@@ -102,11 +102,11 @@ export default {
       @aoTarefaClicada="selecionarTarefa"
     />
     <Modal :mostrarModal="tarefaSelecionada != null">
-      <header class="modal-card-head">
+      <template v-slot:cabecalho>
         <p class="modal-card-title">Editando uma tarefa</p>
         <button class="delete" aria-label="close" @click="fecharModal"></button>
-      </header>
-      <section class="modal-card-body">
+      </template>
+      <template v-slot:corpo>
         <div class="field">
           <label for="descricaoDaTarefa " class="label"
             >Descrição da tarefa</label
@@ -118,15 +118,15 @@ export default {
             id="descricaoDaTarefa"
           />
         </div>
-      </section>
-      <footer class="modal-card-foot">
+      </template>
+      <template v-slot:rodape>
         <div class="buttons">
           <button class="button is-success" @click="alterarTarefa">
             Salvar alterações
           </button>
           <button class="button" @click="fecharModal">Cancelar</button>
         </div>
-      </footer>
+      </template>
     </Modal>
   </div>
 </template>
