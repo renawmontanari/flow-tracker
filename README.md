@@ -1,46 +1,65 @@
-# 🧠 FlowTracker
+# FlowTracker
 
-**FlowTracker** é uma aplicação web de gerenciamento de tarefas com rastreamento de tempo, desenvolvida com **Vue.js**, **Bulma**, **Axios** e uma **API local com json-server**. O projeto tem como objetivo aplicar e consolidar conhecimentos adquiridos no curso de Vue.js da Alura, focando no desenvolvimento de habilidades práticas com o framework.
+> Gerenciador de tarefas com cronômetro: registra quanto tempo cada atividade
+> consumiu e agrupa o histórico por projeto.
 
-![flowtracker](https://github.com/user-attachments/assets/ab595252-d258-4590-bea1-cf5ba3ff0e14)
-
----
-
-## 🚀 Funcionalidades
-
-- ✅ Cadastro e filtro de tarefas por nome e projeto
-- ⏱️ Temporizador de tarefas com botões de play/stop
-- 📁 Organização das tarefas por projetos
-- 🔎 Campo de busca para filtragem
-- 🌙 Alternância entre modo claro e escuro
-- 📡 Comunicação com API REST simulada via `json-server`
+**[Ver ao vivo](https://flow-tracker.vercel.app)** · `Vue 3` `TypeScript` `Vuex` `Vue Router` `Vite`
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## O problema
 
-- [Vue.js 3](https://vuejs.org/)
-- [Bulma CSS](https://bulma.io/)
-- [Axios](https://axios-http.com/)
-- [json-server](https://github.com/typicode/json-server)
+Lista de tarefas responde "o que falta", mas não responde "onde meu tempo foi".
+Para quem cobra por hora ou precisa estimar melhor, a segunda pergunta é a que
+importa. O FlowTracker junta as duas coisas: a tarefa e o tempo real que ela levou.
 
----
+## Decisões de arquitetura
 
+**Store fatiada em módulos por domínio.**
+`store/modulos/projeto` e `store/modulos/tarefa`, com `tipo-acoes.ts` e
+`tipo-mutacoes.ts` centralizando as constantes. Vuex sem essa disciplina vira um
+objeto gigante em que ninguém rastreia mais quem mutou o quê; com módulo e
+constante tipada, o autocomplete vira documentação.
 
-## 📦 Instalação
+**Sistema de notificação como preocupação separada.**
+Um hook `notificador` e um componente `Notificacoes` isolam o aviso ao usuário.
+Nenhuma tela precisa saber renderizar toast — ela só emite o evento.
 
-1. Clone o repositório:
+**Cronômetro e temporizador como componentes distintos.**
+`Cronometro` conta, `Temporizador` orquestra início e parada. Separar contagem de
+controle mantém os dois testáveis.
+
+## Rodando localmente
+
+O projeto consome uma API REST local. O `db.json` na raiz serve de base para
+`json-server`.
 
 ```bash
-git clone https://github.com/seu-usuario/flowtracker.git
-cd flowtracker
-
+git clone https://github.com/renawmontanari/flow-tracker.git
+cd flow-tracker
 npm install
-
-npx json-server --watch db.json --port 3000
-
-npm run dev
+npx json-server --watch db.json --port 3000   # em um terminal
+npm run dev                                   # em outro
 ```
 
-📚 Aprendizado
-Este projeto foi criado como parte do meu processo de aprendizado em Vue.js, guiado pelo conteúdo da Alura. Ele tem me ajudado a entender melhor a estrutura de componentes, gerenciamento de estado e integração com APIs REST.
+## O que eu faria diferente
+
+**A URL da API está fixa em `http://localhost:3000`.** É o motivo de a versão
+publicada na Vercel não carregar dado nenhum: o navegador do visitante procura um
+servidor na máquina dele. Deploy que aponta para `localhost` é deploy que engana
+quem abre o link — corrigir isso com `VITE_API_URL` é a primeira coisa a fazer
+aqui.
+
+**`reatividade.js` na raiz é arquivo de estudo esquecido.** Não pertence ao
+projeto.
+
+**Vuex é a escolha datada.** Em Vue 3 hoje eu usaria Pinia: menos cerimônia,
+tipagem melhor e sem a separação artificial entre action e mutation.
+
+**Sem persistência real.** `json-server` resolve o protótipo; um backend de
+verdade seria o passo seguinte — e existe um pronto neste perfil, em
+[pulseBackend](https://github.com/renawmontanari/pulseBackend).
+
+## Licença
+
+MIT
